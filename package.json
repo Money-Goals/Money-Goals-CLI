@@ -1,0 +1,27 @@
+{
+  "name": "money-goals-terminal",
+  "version": "1.0.0",
+  "description": "Terminal App for Money Goals",
+  "main": "./bin/index.js",
+  "bin": {
+    "money-goals-cli": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Money-Goals/Money-Goals-Terminal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Money-Goals/Money-Goals-Terminal/issues"
+  },
+  "homepage": "https://github.com/Money-Goals/Money-Goals-Terminal#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^8.0.0",
+    "prompt-sync": "^4.2.0"
+  }
+}
