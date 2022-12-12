@@ -3,6 +3,7 @@
 const chalk = require("chalk");
 let prompt = require("prompt-sync")();
 const fetch = require("cross-fetch");
+const env = require("dotenv").config()
 
 async function loadPrompts() {
   console.log(chalk.bold.underline.bgWhite.cyan("Welcome to Money Goals!"));
@@ -17,7 +18,7 @@ async function loadPrompts() {
 loadPrompts();
 
 async function loadUser(email, password) {
-  const resp = await fetch(`${process.env.API_URL}/api/v1/users/sessions`, {
+  const resp = await fetch(`http://localhost:7890/api/v1/users/sessions`, {
     method: "POST",
     headers: {
       Accept: "application/json",
