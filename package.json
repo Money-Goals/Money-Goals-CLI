@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/Money-Goals/Money-Goals-Terminal/issues"
   },
-  "homepage": "https://github.com/Money-Goals/Money-Goals-Terminal#readme"
+  "homepage": "https://github.com/Money-Goals/Money-Goals-Terminal#readme",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "inquirer": "^9.1.4"
+  }
 }
