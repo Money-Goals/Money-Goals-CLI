@@ -3,7 +3,10 @@
 const chalk = require("chalk");
 let prompt = require("prompt-sync")();
 const fetch = require("cross-fetch");
-const env = require("dotenv").config()
+const env = require("dotenv").config();
+const cookie = require("cookie");
+const { signInUser } = require("../auth-utils");
+const { fetchSecrets } = require("../fetch-utils");
 
 async function loadPrompts() {
   console.log(chalk.bold.underline.bgWhite.cyan("Welcome to Money Goals!"));
@@ -12,21 +15,10 @@ async function loadPrompts() {
 
   console.log(chalk.bold.red(`Hello ${email}!`));
   const password = prompt.hide("What is your password? ");
-  await loadUser(email, password);
+  const cookieInfo = await signInUser(email, password);
+  const secrets = await fetchSecrets(cookieInfo);
+  console.log(secrets);
 }
 
 loadPrompts();
 
-async function loadUser(email, password) {
-  const resp = await fetch(`http://localhost:7890/api/v1/users/sessions`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-    credentials: "include",
-  });
-  const data = await resp.json();
-  console.log(data);
-}
