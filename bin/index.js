@@ -2,6 +2,7 @@
 
 const chalk = require("chalk");
 let prompt = require("prompt-sync")();
+const fetch = require("cross-fetch");
 
 async function loadPrompts() {
   console.log(chalk.bold.underline.bgWhite.cyan("Welcome to Money Goals!"));
@@ -12,6 +13,9 @@ async function loadPrompts() {
   const password = prompt.hide("What is your password? ");
   await loadUser(email, password);
 }
+
+loadPrompts();
+
 async function loadUser(email, password) {
   const resp = await fetch(`${process.env.API_URL}/api/v1/users/sessions`, {
     method: "POST",
