@@ -2,13 +2,33 @@
 
 const chalk = require("chalk");
 let prompt = require("prompt-sync")();
+const fetch = require("cross-fetch");
+const cookie = require("cookie");
 
-console.log(chalk.bold.underline.bgWhite.cyan("Welcome to Money Goals!"));
+require("dotenv").config();
 
-const email = prompt("Hello. What is your email? ");
+const { signInUser } = require("../auth-utils");
+const { fetchAccounts } = require("../fetch-utils");
 
-console.log(chalk.bold.red(`Hello ${email}!`));
+async function loadPrompts() {
+  console.log(chalk.bold.underline.bgWhite.cyan("Welcome to Money Goals!"));
 
-const password = prompt.hide("What is your password? ");
+  let validUser = false;
+  let cookieInfo;
+  while(!validUser){
+      const email = prompt("Hello. What is your email? ");
+      console.log(chalk.bold.red(`Hello ${email}!`));
+      const password = prompt.hide("What is your password? ");
+    try {
+        cookieInfo = await signInUser(email, password);
+        validUser = true;
+    } catch (e) {
+        console.log(chalk.bold.red(e.message));
+    }
+  }
+  const secrets = await fetchAccounts(cookieInfo);
+  console.log(secrets);
+}
 
-console.log(password);
+loadPrompts();
+
