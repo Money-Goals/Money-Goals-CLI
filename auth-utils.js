@@ -4,7 +4,7 @@ const chalk = require("chalk");
 
 
 async function signInUser(email, password) {
-    const resp = await fetch(`http://localhost:7890/api/v1/users/sessions`, {
+    const resp = await fetch(`${process.env.API_URL}/api/v1/users/sessions`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -13,10 +13,12 @@ async function signInUser(email, password) {
       body: JSON.stringify({ email, password }),
       credentials: "include",
     });
-    console.log(resp.headers.raw());
-    const cookieInfo = cookie.parse(resp.headers.raw()["set-cookie"][0]);
-    console.log(chalk.bold.green(cookieInfo.session));
     const data = await resp.json();
+    if(!resp.ok) {
+      throw new Error(data.message);
+    }
+    const cookieInfo = cookie.parse(resp.headers.raw()["set-cookie"][0]);
+    // console.log(chalk.bold.green(cookieInfo.session));
     return cookieInfo;
   }
 

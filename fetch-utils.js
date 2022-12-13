@@ -1,8 +1,8 @@
 const fetch = require("cross-fetch");
 const cookie = require("cookie");
 
-async function fetchSecrets(cookieInfo) {
-    const resp = await fetch("http://localhost:7890/api/v1/users/sessions", {
+async function fetchAccounts(cookieInfo) {
+    const resp = await fetch(`${process.env.API_URL}/api/v1/accounts`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -15,4 +15,4 @@ async function fetchSecrets(cookieInfo) {
     return data;
 }
 
-module.exports = { fetchSecrets };
+module.exports = { fetchAccounts };
