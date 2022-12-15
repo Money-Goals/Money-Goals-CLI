@@ -79,7 +79,7 @@ async function loadPrompts() {
   console.log(
     chalk.bold.cyan("You have $" + remaining + " remaining each month")
   );
-
+  console.log(userAccountInput);
   // This is where we would have the option to choose 'Get out of Debt', 'Save', or 'Invest'
 
   // Credit card debt track
@@ -97,6 +97,7 @@ async function loadPrompts() {
     monthsUntilPayoff,
   };
   const userCCInfo = await postCC(userCCInput, cookieInfo);
+  console.log(userCCInput);
 
   // Fake equation
   const ccEquation =
@@ -126,6 +127,7 @@ async function loadPrompts() {
     userRetirementInput,
     cookieInfo
   );
+  console.log(userRetirementInput);
 
   // Fake equation
   const retirementEquation =

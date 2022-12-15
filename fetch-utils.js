@@ -46,7 +46,7 @@ async function postCC(userCCInfo, cookieInfo) {
 }
 
 async function postInvestment(userRetirementInfo, cookieInfo) {
-    const resp = await fetch(`${process.env.API_URL}/api/v1/cc`, {
+    const resp = await fetch(`${process.env.API_URL}/api/v1/investments`, {
       method: "POST",
       headers: {
         Accept: "application/json",
