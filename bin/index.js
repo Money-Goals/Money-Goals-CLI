@@ -181,3 +181,8 @@ async function loadPrompts() {
 
 loadPrompts();
 
+// const ***INSERT VARIABLE*** = 
+//     console.log('Thank you for stopping by! See you again soon 🙂');
+//     console.log('Developed by: Ryan Smith, Abdullahi Elmi, Adam Robson, Amanda Short');
+//     return logOutUser();
+  
