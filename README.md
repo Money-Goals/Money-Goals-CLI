@@ -7,27 +7,27 @@ A terminal app dedicated to helping improve individual financial planning. This 
 
 ## **Dev Team:**
 
-### | [**Ryan Smith**]-- Github | LinkedIn
+### | [**Ryan Smith**]-- [Github] | [LinkedIn]
 
-<img src="">
+<img src="" width="250" height="250" style="object-fit:cover">
 
 Ryan is a Full Stack Software Developer based in Chicago, Illinois. 
 
-### | [**Abdullahi Elmi**]-- Github | LinkedIn
+### | [**Abdullahi Elmi**]-- [Github] | [LinkedIn]
 
-<img src="">
+<img src="" width="250" height="250" style="object-fit:cover">
 
 Abdullahi is a Full Stack Software Developer based in Portland, Oregon. 
 
-### | [**Adam Robson**]-- Github | LinkedIn
+### | [**Adam Robson**]-- [Github] | [LinkedIn]
 
-<img src="">
+<img src="" width="250" height="250" style="object-fit:cover">
 
 Adam is a Full Stack Software Developer based in Portland, Oregon. 
 
-### | [**Amanda Short**]-- Github | LinkedIn
+### | [**Amanda Short**]-- [Github](https://github.com/amanda-short) | [LinkedIn](https://www.linkedin.com/in/amanda-short24/)
 
-<img src="">
+<img src="" width="250" height="250" style="object-fit:cover">
 
 Amanda is a Full Stack Software Developer based in Portland, Oregon. Previously in the Federal workforce and in 2022 decided to change career paths. Outside of coding, she enjoys live sporting events and spending time with her wife and 1 year old daughter. 
 
