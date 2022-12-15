@@ -89,7 +89,7 @@ async function loadPrompts() {
         console.log(chalk.bold.green("Great! Let's get started in our Debt Management track."));
         // Credit card debt track
         const ccBalance = prompt("What is your credit card balance? ");
-        const interest = prompt("What is your credit card's interest rate? ");
+        const interest = prompt("What is your credit card's interest rate? (10 percent = 0.1) ");
         const monthlyPayment = prompt("What is your monthly credit card payment? ");
         const monthsUntilPayoff = prompt(
           "In how many months do you want to pay off your debt? "
@@ -103,18 +103,17 @@ async function loadPrompts() {
         };
         const userCCInfo = await postCC(userCCInput, cookieInfo);
         console.log(userCCInput);
-      
-        // Fake equation
-        const ccEquation =
-          ccBalance -
-          interest * monthsUntilPayoff -
-          monthlyPayment * monthsUntilPayoff;
-        console.log(
-          chalk.bold.cyan(
-            "You will need to increase your monthly payment to $" +
-              ccEquation +
-              " each month to hit your goal."
-          )
+        
+
+        const calculateDebt = ({ ccBalance, monthlyPayment, interest, monthsUntilPayoff }) => {
+          const rawMonths = ccBalance / monthlyPayment;
+          const annualI = (monthlyPayment * 12) * interest;
+          const newMonthlyPayment = (ccBalance / monthsUntilPayoff);
+          return Math.floor(Number(newMonthlyPayment));
+        }
+        
+        console.log(chalk.bold.cyan(
+          "You will need to make a monthly payment of $" + calculateDebt({ ccBalance, monthlyPayment, interest, monthsUntilPayoff }) + " to hit your goal.")
         );
     } else if (userTrack === 'Save') {
       console.log(
@@ -124,23 +123,24 @@ async function loadPrompts() {
       const savingsGoal = prompt("How much would you like to save? ");
   
       const userSavingsInput = {
-        savingsGoal
+        savingsGoal: Number(savingsGoal)
       };
+      
       const userSavingsInfo = await postSavings(
         userSavingsInput,
         cookieInfo
       );
       console.log(userSavingsInput);
-  
-      // Fake equation
-      const savingsEquation = savingsGoal * 20;
-      console.log(
-        chalk.bold.cyan(
-          "It will take " +
-            savingsEquation +
-            " months to reach your goal."
-        )
-      );
+
+      const monthlySavings = monthlyIncome * 0.2;
+     
+      const calculateMonths = (savingsGoal, monthlySavings) => {
+        const timeToGoal = Number(savingsGoal) / monthlySavings;
+        return Math.floor(timeToGoal);
+      };
+      
+      console.log(chalk.bold.cyan("The recommended savings per month based on your monthly income is " + monthlySavings + ". It will take you " + calculateMonths(savingsGoal, monthlySavings) + " months to reach your goal."));
+      
     } else if (userTrack === 'Invest') {
       // Investment - retirement track
       console.log(
