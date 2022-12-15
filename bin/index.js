@@ -8,7 +8,7 @@ const cookie = require("cookie");
 require("dotenv").config();
 
 const { signInUser } = require("../auth-utils");
-const { fetchAccounts, postAccounts } = require("../fetch-utils");
+const { fetchAccounts, postAccounts, postCC } = require("../fetch-utils");
 
 async function loadPrompts() {
   console.log(chalk.bold.underline.bgWhite.cyan("Welcome to Money Goals!"));
@@ -26,8 +26,8 @@ async function loadPrompts() {
         console.log(chalk.bold.red(e.message));
     }
   }
-  const secrets = await fetchAccounts(cookieInfo);
-  console.log(secrets);
+
+  console.log(chalk.bold.cyan('You have successfully logged in! Now, provide us with some info to help you achieve your money goals.'));
 
   const monthlyIncome = prompt("What is your net income per month? ");
   const housing = prompt("How much do you spend on housing per month? ");
@@ -43,7 +43,24 @@ async function loadPrompts() {
 
   const accountInfo = await postAccounts(userAccountInput, cookieInfo);
   const remaining = monthlyIncome - housing - transportation - groceries - insurance - healthcare - utilities - miscellaneous - savings
-  console.log('You have $', remaining, 'remaining each month');
+  console.log(chalk.bold.cyan('You have $' + remaining + ' remaining each month'));
+
+  // This is where we would have the option to choose 'Get out of Debt', 'Save', or 'Invest'
+
+
+  // Credit card debt track
+  const ccBalance = prompt("What is your credit card balance? ");
+  const interest = prompt("What is your credit card's interest rate? ");
+  const monthlyPayment = prompt(
+    "What is your monthly credit card payment? "
+  );
+  const monthsUntilPayoff = prompt("In how many months do you want to pay off your debt? ");
+
+  userCCInput = {ccBalance, interest, monthlyPayment, monthsUntilPayoff}
+  const userCCInfo = await postCC(userCCInput, cookieInfo)
+
+  const ccEquation = (ccBalance - (interest * monthsUntilPayoff) - (monthlyPayment * monthsUntilPayoff))
+  console.log(chalk.bold.cyan('You will need to increase your monthly payment to $' + ccEquation + ' each month to hit your goal.'));  
 }
 
 loadPrompts();

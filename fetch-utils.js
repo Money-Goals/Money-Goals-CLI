@@ -30,4 +30,19 @@ async function postAccounts(userAccountInfo, cookieInfo) {
     return data;
 }
 
-module.exports = { fetchAccounts, postAccounts };
+async function postCC(userCCInfo, cookieInfo) {
+    const resp = await fetch(`${process.env.API_URL}/api/v1/cc`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Cookie: cookie.serialize("session", cookieInfo.session),
+      },
+      body: JSON.stringify(userCCInfo),
+      credentials: "include",
+    });
+    const data = await resp.json();
+    return data;
+}
+
+module.exports = { fetchAccounts, postAccounts, postCC };
