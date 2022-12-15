@@ -8,7 +8,7 @@ const cookie = require("cookie");
 require("dotenv").config();
 
 const { signInUser } = require("../auth-utils");
-const { fetchAccounts, postAccounts, postCC, postInvestment } = require("../fetch-utils");
+const { fetchAccounts, postAccounts, postCC, postInvestment, postSavings } = require("../fetch-utils");
 
 async function loadPrompts() {
   console.log(chalk.bold.underline.bgWhite.cyan("Welcome to Money Goals!"));
@@ -82,63 +82,100 @@ async function loadPrompts() {
   console.log(userAccountInput);
   // This is where we would have the option to choose 'Get out of Debt', 'Save', or 'Invest'
 
-  // Credit card debt track
-  const ccBalance = prompt("What is your credit card balance? ");
-  const interest = prompt("What is your credit card's interest rate? ");
-  const monthlyPayment = prompt("What is your monthly credit card payment? ");
-  const monthsUntilPayoff = prompt(
-    "In how many months do you want to pay off your debt? "
-  );
-
-  const userCCInput = {
-    ccBalance,
-    interest,
-    monthlyPayment,
-    monthsUntilPayoff,
-  };
-  const userCCInfo = await postCC(userCCInput, cookieInfo);
-  console.log(userCCInput);
-
-  // Fake equation
-  const ccEquation =
-    ccBalance -
-    interest * monthsUntilPayoff -
-    monthlyPayment * monthsUntilPayoff;
-  console.log(
-    chalk.bold.cyan(
-      "You will need to increase your monthly payment to $" +
-        ccEquation +
-        " each month to hit your goal."
-    )
-  );
-
-  // Investment - retirement track
-  const age = prompt("What is your current age? ");
-  const retirementAge = prompt("At what age do you wish to retire? ");
-  const retirementAccountBalance = prompt(
-    "What is your current retirement account balance? "
-  );
-  const retirementAmountGoal = prompt(
-    "How much money do you want to retire with? "
-  );
-
-  const userRetirementInput = { age, retirementAge, retirementAccountBalance };
-  const userRetirementInfo = await postInvestment(
-    userRetirementInput,
-    cookieInfo
-  );
-  console.log(userRetirementInput);
-
-  // Fake equation
-  const retirementEquation =
-    (retirementAmountGoal - retirementAccountBalance) * (retirementAge - age);
-  console.log(
-    chalk.bold.cyan(
-      "You will need to invest $" +
-        retirementEquation +
-        " each month to hit your retirement goal."
-    )
-  );
+  while(validUser) {
+    const userTrack = prompt(chalk.bold.cyan("Which financial track best fits your needs? (type Debt, Save, or Invest) "));
+  
+    if (userTrack === 'Debt') {
+        console.log(chalk.bold.green("Great! Let's get started in our Debt Management track."));
+        // Credit card debt track
+        const ccBalance = prompt("What is your credit card balance? ");
+        const interest = prompt("What is your credit card's interest rate? ");
+        const monthlyPayment = prompt("What is your monthly credit card payment? ");
+        const monthsUntilPayoff = prompt(
+          "In how many months do you want to pay off your debt? "
+        );
+      
+        const userCCInput = {
+          ccBalance,
+          interest,
+          monthlyPayment,
+          monthsUntilPayoff,
+        };
+        const userCCInfo = await postCC(userCCInput, cookieInfo);
+        console.log(userCCInput);
+      
+        // Fake equation
+        const ccEquation =
+          ccBalance -
+          interest * monthsUntilPayoff -
+          monthlyPayment * monthsUntilPayoff;
+        console.log(
+          chalk.bold.cyan(
+            "You will need to increase your monthly payment to $" +
+              ccEquation +
+              " each month to hit your goal."
+          )
+        );
+    } else if (userTrack === 'Save') {
+      console.log(
+        chalk.bold.green("Great! Let's get started in our Savings Growth track.")
+      );
+      // Savings track
+      const savingsGoal = prompt("How much would you like to save? ");
+  
+      const userSavingsInput = {
+        savingsGoal
+      };
+      const userSavingsInfo = await postSavings(
+        userSavingsInput,
+        cookieInfo
+      );
+      console.log(userSavingsInput);
+  
+      // Fake equation
+      const savingsEquation = savingsGoal * 20;
+      console.log(
+        chalk.bold.cyan(
+          "It will take " +
+            savingsEquation +
+            " months to reach your goal."
+        )
+      );
+    } else if (userTrack === 'Invest') {
+      // Investment - retirement track
+      console.log(
+        chalk.bold.green("Great! Let's get started in our Investments track.")
+      );
+      const age = prompt("What is your current age? ");
+      const retirementAge = prompt("At what age do you wish to retire? ");
+      const retirementAccountBalance = prompt(
+        "What is your current retirement account balance? "
+      );
+      const retirementAmountGoal = prompt(
+        "How much money do you want to retire with? "
+      );
+    
+      const userRetirementInput = { age, retirementAge, retirementAccountBalance };
+      const userRetirementInfo = await postInvestment(
+        userRetirementInput,
+        cookieInfo
+      );
+      console.log(userRetirementInput);
+    
+      // Fake equation
+      const retirementEquation =
+        (retirementAmountGoal - retirementAccountBalance) * (retirementAge - age);
+      console.log(
+        chalk.bold.cyan(
+          "You will need to invest $" +
+            retirementEquation +
+            " each month to hit your retirement goal."
+        )
+      );
+    } else if (userTrack != 'Debt' | 'Save' | 'Invest') {
+      console.log(chalk.bold.red('Not a valid selection. Please try again.'));
+    }
+  }
 }
 
 loadPrompts();
