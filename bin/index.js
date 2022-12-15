@@ -89,7 +89,7 @@ async function loadPrompts() {
         console.log(chalk.bold.green("Great! Let's get started in our Debt Management track."));
         // Credit card debt track
         const ccBalance = prompt("What is your credit card balance? ");
-        const interest = prompt("What is your credit card's interest rate? (10 percent = 0.1)");
+        const interest = prompt("What is your credit card's interest rate? (10 percent = 0.1) ");
         const monthlyPayment = prompt("What is your monthly credit card payment? ");
         const monthsUntilPayoff = prompt(
           "In how many months do you want to pay off your debt? "
