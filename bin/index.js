@@ -122,25 +122,26 @@ async function loadPrompts() {
       );
       // Savings track
       const savingsGoal = prompt("How much would you like to save? ");
-  
+  // this is returning a string NOT A NUMBER
       const userSavingsInput = {
-        savingsGoal
+        savingsGoal: Number(savingsGoal)
       };
+      
       const userSavingsInfo = await postSavings(
         userSavingsInput,
         cookieInfo
       );
       console.log(userSavingsInput);
-  
-      // Fake equation
-      const savingsEquation = savingsGoal * 20;
-      console.log(
-        chalk.bold.cyan(
-          "It will take " +
-            savingsEquation +
-            " months to reach your goal."
-        )
-      );
+
+      const monthlySavings = monthlyIncome * 0.2;
+     
+      const calculateMonths = (savingsGoal, monthlySavings) => {
+        const timeToGoal = Number(savingsGoal) / monthlySavings;
+        return Math.floor(timeToGoal);
+      };
+      
+      console.log(chalk.bold.cyan("The recommended savings per month based on your monthly income is " + monthlySavings + ". It will take you " + calculateMonths(savingsGoal, monthlySavings) + " months to reach your goal."));
+      
     } else if (userTrack === 'Invest') {
       // Investment - retirement track
       console.log(
