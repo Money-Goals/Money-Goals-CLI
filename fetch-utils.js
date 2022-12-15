@@ -60,4 +60,19 @@ async function postInvestment(userRetirementInfo, cookieInfo) {
     return data;
 }
 
-module.exports = { fetchAccounts, postAccounts, postCC, postInvestment };
+async function postSavings(userSavingsInfo, cookieInfo) {
+    const resp = await fetch(`${process.env.API_URL}/api/v1/savings`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Cookie: cookie.serialize("session", cookieInfo.session),
+      },
+      body: JSON.stringify(userSavingsInfo),
+      credentials: "include",
+    });
+    const data = await resp.json();
+    return data;
+}
+
+module.exports = { fetchAccounts, postAccounts, postCC, postInvestment, postSavings };
