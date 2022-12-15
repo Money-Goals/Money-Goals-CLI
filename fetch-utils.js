@@ -15,4 +15,19 @@ async function fetchAccounts(cookieInfo) {
     return data;
 }
 
-module.exports = { fetchAccounts };
+async function postAccounts(userAccountInfo, cookieInfo) {
+    const resp = await fetch(`${process.env.API_URL}/api/v1/accounts`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Cookie: cookie.serialize("session", cookieInfo.session),
+      },
+      body: JSON.stringify(userAccountInfo),
+      credentials: "include",
+    });
+    const data = await resp.json();
+    return data;
+}
+
+module.exports = { fetchAccounts, postAccounts };
