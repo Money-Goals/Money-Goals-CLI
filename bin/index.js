@@ -121,7 +121,7 @@ async function loadPrompts() {
       );
       // Savings track
       const savingsGoal = prompt("How much would you like to save? ");
-  
+  // this is returning a string NOT A NUMBER
       const userSavingsInput = {
         savingsGoal: Number(savingsGoal)
       };
@@ -195,3 +195,8 @@ async function loadPrompts() {
 
 loadPrompts();
 
+// const ***INSERT VARIABLE*** = 
+//     console.log('Thank you for stopping by! See you again soon 🙂');
+//     console.log('Developed by: Ryan Smith, Abdullahi Elmi, Adam Robson, Amanda Short');
+//     return logOutUser();
+  
