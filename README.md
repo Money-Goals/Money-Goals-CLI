@@ -2,32 +2,22 @@
 
 ## **Description:**
 
-A terminal app dedicated to helping improve individual financial planning. This project was developed in a one week sprint using express and prompt-sync. Prompt-sync is the command line interface that users see. **language/framework** is used to create the database which stores the users input data after each prompt.
-    terminal command: ***INSERT***
+A terminal app dedicated to helping improve individual financial planning. This project was developed in a one week sprint using node.js and express and prompt-sync. Prompt-sync is the command line interface that users see. Node.js and express were used to create the database which stores the users input data after each prompt.
 
 ## **Dev Team:**
 
-### | [**Ryan Smith**]-- [Github] | [LinkedIn]
-
-<img src="" width="250" height="250" style="object-fit:cover">
+### | [**Ryan Smith**]-- [Github](https://github.com/ryanjeffrey) | [LinkedIn](https://linkedin.com/in/ryan-jeffrey-smith)
 
 Ryan is a Full Stack Software Developer based in Chicago, Illinois. 
 
-### | [**Abdullahi Elmi**]-- [Github] | [LinkedIn]
+### | [**Abdullahi Elmi**]-- [Github](https://github.com/ElmiAbdullahi) | [LinkedIn](https://www.linkedin.com/in/abdullahi-elmi14/)
 
-<img src="" width="250" height="250" style="object-fit:cover">
+Abdullahi is a Full Stack Software Developer based in Roseburg, Oregon.
 
-Abdullahi is a Full Stack Software Developer based in Portland, Oregon. 
+### | [**Adam Robson**]-- [Github](https://github.com/Adam-Robson) | [LinkedIn](https://www.linkedin.com/in/adamrayrobson/)
 
-### | [**Adam Robson**]-- [Github] | [LinkedIn]
-
-<img src="" width="250" height="250" style="object-fit:cover">
-
-Adam is a Full Stack Software Developer based in Portland, Oregon. 
+Adam is a Full Stack Software Developer based in Portland, Oregon.
 
 ### | [**Amanda Short**]-- [Github](https://github.com/amanda-short) | [LinkedIn](https://www.linkedin.com/in/amanda-short24/)
 
-<img src="" width="250" height="250" style="object-fit:cover">
-
-Amanda is a Full Stack Software Developer based in Portland, Oregon. Previously in the Federal workforce and in 2022 decided to change career paths. Outside of coding, she enjoys live sporting events and spending time with her wife and 1 year old daughter. 
-
+Amanda is a Full Stack Software Developer based in Portland, Oregon.
