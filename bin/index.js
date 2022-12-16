@@ -155,20 +155,35 @@ async function loadPrompts() {
         "How much money do you want to retire with? "
       );
     
-      const userRetirementInput = { age, retirementAge, retirementAccountBalance };
+      const userRetirementInput = { 
+        age, 
+        retirementAge, 
+        retirementAccountBalance,
+        retirementAmountGoal,
+       };
+
       const userRetirementInfo = await postInvestment(
         userRetirementInput,
         cookieInfo
       );
       console.log(userRetirementInput);
     
-      // Fake equation
-      const retirementEquation =
-        (retirementAmountGoal - retirementAccountBalance) * (retirementAge - age);
+      const retirementEquation = (
+        retirementAge, 
+        retirementAccountBalance, 
+        retirementAmountGoal 
+      ) => {
+        const amountNeeded = retirementAmountGoal - retirementAccountBalance
+        const yearsToGo = retirementAge - age;
+        const totalNeeded = (amountNeeded / yearsToGo);
+        const result = (totalNeeded * (1 + .06)) / 12;
+        return result
+      }
+
       console.log(
         chalk.bold.cyan(
           "You will need to invest $" +
-            retirementEquation +
+            retirementEquation(retirementAge, retirementAccountBalance, retirementAmountGoal) +
             " each month to hit your retirement goal."
         )
       );
